@@ -26,6 +26,8 @@ class EbookController extends Controller
         $description = $request->description;
 
         $category = $request->category;
+        $size = $request->size;
+        $pages = $request->pages;
 
         $image = $request->file('image');
 
@@ -39,6 +41,8 @@ class EbookController extends Controller
         $ebook->author = $author;
         $ebook->description = $description;
         $ebook->category = $category;
+        $ebook->size = $size;
+        $ebook->pages = $pages;
         $ebook->image = $url;
 
         $ebook->save();

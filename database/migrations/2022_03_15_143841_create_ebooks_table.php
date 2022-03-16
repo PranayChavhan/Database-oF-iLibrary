@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('author');
             $table->string('description');
             $table->string('category');
+            $table->string('size');
+            $table->string('pages');
             $table->string('image');
             $table->timestamps();
         });
