@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\EbookController;
 use App\Http\Controllers\UserDataController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::get('/addebook',[EbookController::class, 'showebook']);
 
 Route::post('/addebook',[EbookController::class, 'createebook']);
 
-Route::get('/addUser',[UserDataController::class, 'showUser']);
+Route::get('/addUser',[UsersController::class, 'showUser']);
 
-Route::post('/addUser',[UserDataController::class, 'createUser']);
+Route::post('/addUser',[UsersController::class, 'createUser']);
+
+Route::post('/login',[UsersController::class, 'login']);
+
