@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use File;
 use App\Models\Ebook;
@@ -31,8 +30,9 @@ class EbookController extends Controller
 
         $image = $request->file('image');
 
+        
         $ebook = new Ebook();
-
+        
         $path = $image->store('ebooks', 'public');
 
         $url = Storage::disk('public')->url($path);

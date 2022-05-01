@@ -47,7 +47,45 @@ class BooksController extends Controller
         return response()->json([
             'status'=> 200,
             'message'=>'Book stored Successfully',
-            $book,
+             $book,
         ]);
+    }
+
+
+    public function searchByCaterory($category)
+    {
+
+        $books = Books::where("category", $category)->get();
+
+        if (count($books) > 0) {
+            return $books;
+        }
+        else {
+            return response()->json([
+                        'status'=> 404,
+                        'message' => 'No Book Found',
+                    ]);
+        }
+
+        
+    }
+
+    public function searchByName($title)
+    {
+
+        $b = Books::where("title", 'like', '%'.$title.'%')->get();
+
+        if (count($b) > 0) {
+            return response()->json([
+                'status'=> 200,
+                'books'=>$b,
+            ]);
+        }
+        else {
+            return response()->json([
+                        'status'=> 404,
+                        'message' => 'No Book Found',
+                    ]);
+        }
     }
 }
