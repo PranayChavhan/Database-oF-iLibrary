@@ -53,4 +53,27 @@ class EbookController extends Controller
             $ebook,
         ]);
     }
+
+    public function destroy($id)
+    {
+
+        $ebook = Ebook::find($id);
+        if($ebook)
+        {
+            $ebook->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Ebook Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Ebook ID Found',
+            ]);
+        }
+    }
+
+
 }

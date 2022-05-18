@@ -43,4 +43,27 @@ class ResourcesController extends Controller
              $resources,
         ]);
     }
+
+    public function destroy($id)
+    {
+
+        $resources = Resources::find($id);
+        if($resources)
+        {
+            $resources->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Resources Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Resources ID Found',
+            ]);
+        }
+    }
+
+
 }

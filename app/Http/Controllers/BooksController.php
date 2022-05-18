@@ -88,4 +88,33 @@ class BooksController extends Controller
                     ]);
         }
     }
+
+    public function destroy($id)
+    {
+
+        $books = Books::find($id);
+        if($books)
+        {
+            $books->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Book Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No book ID Found',
+            ]);
+        }
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $books = Books::find($id);
+        $books->update($request->all());
+        return $books;
+    }
 }

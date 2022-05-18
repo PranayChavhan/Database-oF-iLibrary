@@ -33,13 +33,15 @@ class UsersController extends Controller
         $address = $request->address;
         $department = $request->department;
         $year = $request->year;
-        $userImg = $request->file('userImg');
+        // $userImg = $request->file('userImg');
+        $userImg = $request->userImg;
+        
 
         $user = new User();
 
-        $path = $userImg->store('users', 'public');
+        // $path = $userImg->store('users', 'public');
 
-        $url = Storage::disk('public')->url($path);
+        // $url = Storage::disk('public')->url($path);
          
         $user->name = $name;
         $user->enrollment = $enrollment;
@@ -49,7 +51,9 @@ class UsersController extends Controller
         $user->address = $address;
         $user->department = $department;
         $user->year = $year;
-        $user->userImg = $url;
+        // $user->userImg = $url;
+        $user->userImg = $userImg;
+        
 
         $user->save();
 
@@ -130,6 +134,27 @@ class UsersController extends Controller
             ]);;
         }
 
+    }
+
+    public function destroy($id)
+    {
+
+        $user = User::find($id);
+        if($user)
+        {
+            $user->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Student Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Student ID Found',
+            ]);
+        }
     }
 
 

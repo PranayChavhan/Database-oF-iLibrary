@@ -71,6 +71,27 @@ class TeachersController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+
+        $teacher = Teachers::find($id);
+        if($teacher)
+        {
+            $teacher->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Teacher Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Teacher ID Found',
+            ]);
+        }
+    }
+
 
 
 

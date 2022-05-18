@@ -77,3 +77,15 @@ Route::post('/teachers',[TeachersController::class, 'createTeacher']);
 
 Route::post('/teacherslogin',[TeachersController::class, 'login']);
 
+Route::delete('/book/{id}', [BooksController::class, 'destroy']);
+
+Route::delete('/student/{id}', [UsersController::class, 'destroy']);
+
+Route::delete('/teacher/{id}', [TeachersController::class, 'destroy']);
+
+Route::delete('/resources/{id}', [ResourcesController::class, 'destroy']);
+
+Route::delete('/ebook/{id}', [EbookController::class, 'destroy']);
+
+Route::put('/editbook/{id}', [BooksController::class, 'update']);
+
