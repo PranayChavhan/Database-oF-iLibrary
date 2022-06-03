@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('size');
             $table->string('pages');
             $table->string('image');
+            $table->string('bookimg');
             $table->timestamps();
         });
     }

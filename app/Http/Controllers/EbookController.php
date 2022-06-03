@@ -29,6 +29,7 @@ class EbookController extends Controller
         $pages = $request->pages;
 
         $image = $request->file('image');
+        $bookimg = $request->file('bookimg');
 
         
         $ebook = new Ebook();
@@ -36,6 +37,15 @@ class EbookController extends Controller
         $path = $image->store('ebooks', 'public');
 
         $url = Storage::disk('public')->url($path);
+
+        $pathh = parse_url($url, PHP_URL_PATH);
+
+
+        $imagepath = $bookimg->store('ebooks image', 'public');
+
+        $imageurl = Storage::disk('public')->url($imagepath);
+
+        $pathhh = parse_url($imageurl, PHP_URL_PATH);
          
         $ebook->title = $title;
         $ebook->author = $author;
@@ -43,7 +53,8 @@ class EbookController extends Controller
         $ebook->category = $category;
         $ebook->size = $size;
         $ebook->pages = $pages;
-        $ebook->image = $url;
+        $ebook->image = $pathh;
+        $ebook->bookimg = $pathhh;
 
         $ebook->save();
 
@@ -73,6 +84,24 @@ class EbookController extends Controller
                 'message' => 'No Ebook ID Found',
             ]);
         }
+    }
+
+    public function searchByCaterory($category)
+    {
+
+        $ebook = Ebook::where("category", $category)->get();
+
+        if (count($ebook) > 0) {
+            return $ebook;
+        }
+        else {
+            return response()->json([
+                        'status'=> 404,
+                        'message' => 'No Book Found',
+                    ]);
+        }
+
+        
     }
 
 

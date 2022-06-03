@@ -34,13 +34,15 @@ class BooksController extends Controller
         $path = $image->store('books', 'public');
 
         $url = Storage::disk('public')->url($path);
+
+        $pathh = parse_url($url, PHP_URL_PATH);
          
         $book->title = $title;
         $book->author = $author;
         $book->description = $description;
         $book->category = $category;
         $book->noofbook = $noofbook;
-        $book->image = $url;
+        $book->image = $pathh;
 
         $book->save();
 
@@ -48,6 +50,7 @@ class BooksController extends Controller
             'status'=> 200,
             'message'=>'Book stored Successfully',
              $book,
+            
         ]);
     }
 

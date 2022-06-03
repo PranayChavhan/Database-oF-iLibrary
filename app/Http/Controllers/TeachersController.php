@@ -35,6 +35,8 @@ class TeachersController extends Controller
         $path = $teacherImg->store('teacher', 'public');
 
         $url = Storage::disk('public')->url($path);
+
+        $pathh = parse_url($url, PHP_URL_PATH);
          
         $teacher->name = $name;
         $teacher->teacher_id = $teacher_id;
@@ -42,7 +44,7 @@ class TeachersController extends Controller
         $teacher->contact = $contact;
         $teacher->address = $address;
         $teacher->department = $department;
-        $teacher->teacherImg = $url;
+        $teacher->teacherImg = $pathh;
 
         $teacher->save();
 

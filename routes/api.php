@@ -11,6 +11,8 @@ use App\Http\Controllers\IssuedBookController;
 use App\Http\Controllers\AcceptBookController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\TeachersController;
+use App\Http\Controllers\WaitingListControllerController;
+use App\Http\Controllers\IssuedResourcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +25,20 @@ use App\Http\Controllers\TeachersController;
 |
 */
 
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::get('/add',[BooksController::class, 'show']);
+
+Route::get('/issueresourses',[IssuedResourcesController::class, 'showIssuedResource']);
+
+Route::post('/issueresourses',[IssuedResourcesController::class, 'createIssuedResources']);
+
+Route::delete('/issueresourses/{id}',[IssuedResourcesController::class, 'destroy']);
+
+Route::get('/issueresourses/{userEmail}',[IssuedResourcesController::class, 'searchByUserEmail']);
 
 Route::get('/add/{category}', [BooksController::class, 'searchByCaterory']);
 
@@ -36,6 +47,8 @@ Route::get('/search/{title}', [BooksController::class, 'searchByName']);
 Route::post('/add',[BooksController::class, 'create']);
 
 Route::get('/addebook',[EbookController::class, 'showebook']);
+
+Route::get('/addebook/{category}',[EbookController::class, 'searchByCaterory']);
 
 Route::post('/addebook',[EbookController::class, 'createebook']);
 
@@ -53,11 +66,15 @@ Route::post('/wishlist',[WishlistController::class, 'createWishlist']);
 
 Route::get('/wishlist/{userEmail}',[WishlistController::class, 'searchByUserEmail']);
 
+Route::delete('/wishlistDelete/{id}',[WishlistController::class, 'destroy']);
 
 Route::post('/issuedbook',[IssuedBookController::class, 'createIssuedBook']);
 
 Route::post('/issuedbook/{id}',[IssuedBookController::class, 'updateBook']);
 
+Route::delete('/bookkk/{id}', [IssuedBookController::class, 'destroy']);
+
+Route::delete('/waitinglistt/{id}', [WaitingListControllerController::class, 'destroy']);
 
 Route::post('/acceptbook',[AcceptBookController::class, 'acceptbook']);
 
@@ -89,3 +106,6 @@ Route::delete('/ebook/{id}', [EbookController::class, 'destroy']);
 
 Route::put('/editbook/{id}', [BooksController::class, 'update']);
 
+Route::get('/waitinglist',[WaitingListControllerController::class, 'showWaitingList']);
+
+Route::post('/addwaitinglist',[WaitingListControllerController::class, 'createWaitingList']);

@@ -72,6 +72,22 @@ class IssuedBookController extends Controller
                     ]);
         }
     }
+    public function searchByStatus($status)
+    {
+        $issuedbook = issuedbook::where("userEmail", $userEmail)->get();
+        if (count($issuedbook) > 0) {
+            return response()->json([
+                'status'=> 200,
+                'issuedbook' => $issuedbook
+            ]);
+        }
+        else {
+            return response()->json([
+                        'status'=> 404,
+                        'message' => 'No Book Found on issuedbook',
+                    ]);
+        }
+    }
 
     public function updateBook(Request $request, $id,)
     {
@@ -92,6 +108,29 @@ class IssuedBookController extends Controller
         }
 
     }
+
+
+    public function destroy($id)
+    {
+
+        $issuedbook = IssuedBook::find($id);
+        if($issuedbook)
+        {
+            $issuedbook->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Book Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No book ID Found',
+            ]);
+        }
+    }
+
 
 
 

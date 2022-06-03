@@ -30,10 +30,12 @@ class ResourcesController extends Controller
         $path = $image->store('resources', 'public');
 
         $url = Storage::disk('public')->url($path);
+
+        $pathh = parse_url($url, PHP_URL_PATH);
          
         $resources->title = $title;
         $resources->description = $description;
-        $resources->image = $url;
+        $resources->image = $pathh;
 
         $resources->save();
 

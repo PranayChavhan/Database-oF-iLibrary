@@ -61,4 +61,26 @@ class WishlistController extends Controller
                     ]);
         }
     }
+
+
+    public function destroy($id)
+    {
+
+        $wishlist = wishlist::find($id);
+        if($wishlist)
+        {
+            $wishlist->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'book Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No book ID Found',
+            ]);
+        }
+    }
 }
